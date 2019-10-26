@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <div class="starter-template">
+        {{ html|safe }}
+        {% if not session.username %}
+        <a href="/login"><button class="btn btn-primary" type="submit">Log In</button></a>
+        {% endif %}
+<!--         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+ -->      </div>
+{% endblock %}
