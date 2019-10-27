@@ -5,18 +5,15 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, PasswordField
 from wtforms.validators import DataRequired, Length
 
-from flask_sqlalchemy import SQLAlchemy
-
 app = Flask(__name__)
 if app.config['ENV'] == 'production':  # reads from FLASK_ENV env variable
-    app.config.from_object('config.ProductionConfig')
+    app.config.from_object('flask_groupsio.config.ProductionConfig')
 else:
-    app.config.from_object('config.DevelopmentConfig')
+    app.config.from_object('flask_groupsio.config.DevelopmentConfig')
 
 
 # TODO: need to import after app.config takes place -- is this ok?
-from . import views
-from . import filters
+from flask_groupsio import views
 
 
 app.secret_key = app.config['SECRET_KEY']

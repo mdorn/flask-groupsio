@@ -9,6 +9,7 @@ from dateutil.parser import parse
 from flask import render_template, request, make_response, url_for, redirect, flash, session
 
 from .app import app
+from . import filters
 from .forms import LoginForm
 from .models import Message, File, Event, Member
 
