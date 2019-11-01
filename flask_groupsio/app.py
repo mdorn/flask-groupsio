@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
 
+from flask_talisman import Talisman
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, PasswordField
 from wtforms.validators import DataRequired, Length
 
+
 app = Flask(__name__)
+Talisman(app, content_security_policy=None)
+
 if app.config['ENV'] == 'production':  # reads from FLASK_ENV env variable
     app.config.from_object('flask_groupsio.config.ProductionConfig')
 else:

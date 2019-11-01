@@ -1,5 +1,6 @@
 feedparser==5.2.1
 Flask==1.1.1
+flask-talisman==0.7.0
 Flask-WTF==0.14.2
 gunicorn==19.9.0
 mistune==0.8.4
