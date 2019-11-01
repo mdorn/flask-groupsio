@@ -8,10 +8,11 @@ from wtforms.validators import DataRequired, Length
 
 
 app = Flask(__name__)
-Talisman(app, content_security_policy=None)
+
 
 if app.config['ENV'] == 'production':  # reads from FLASK_ENV env variable
     app.config.from_object('flask_groupsio.config.ProductionConfig')
+    Talisman(app, content_security_policy=None)
 else:
     app.config.from_object('flask_groupsio.config.DevelopmentConfig')
 

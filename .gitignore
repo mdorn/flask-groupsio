@@ -127,3 +127,4 @@ dmypy.json
 # CUSTOM
 cookies.curl
 *.DS_Store
+README.local.md
