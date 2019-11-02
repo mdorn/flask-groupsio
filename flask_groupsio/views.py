@@ -53,7 +53,7 @@ def messages():
     data = item.all()
     return render_template(
         'messages.html',
-        items=data['data'],
+        items=data,
         group_name=app.config['GROUP_NAME'],
         group_url=app.config['GROUP_URL']
     )
@@ -63,7 +63,7 @@ def messages():
 def files():
     item = File()
     data = item.all()
-    return render_template('files.html', items=data['data'])
+    return render_template('files.html', items=data)
 
 
 @app.route('/calendar', methods=('GET',))
@@ -72,7 +72,7 @@ def calendar():
     events = item.all()
     for_cal = []
     central = pytz.timezone('US/Central')
-    for e in events['data']:
+    for e in events:
         start = parse(e['start_time'])
         end = parse(e['end_time'])
         start_final = start.astimezone(central).isoformat()
@@ -92,7 +92,6 @@ def feeds():
     entries = feed['items']
     sorted_entries = sorted(entries, key=lambda entry: entry['published_parsed'])
     sorted_entries.reverse()
-    # print(json.dumps(sorted_entries))
     return render_template(
         'feeds.html',
         items=sorted_entries[:50],
@@ -105,4 +104,4 @@ def feeds():
 def directory():
     item = Member()
     data = item.all()
-    return render_template('directory.html', items=data['data'])
+    return render_template('directory.html', items=data)

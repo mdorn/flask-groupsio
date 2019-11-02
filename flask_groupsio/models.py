@@ -14,7 +14,10 @@ class Model(object):
 
     def all(self):
         resp = groupsio_api_query(self.get_api_url())
-        return resp
+        if resp['data'] is not None:
+            return resp['data']
+        else:
+            return []
 
 
 class Message(Model):
