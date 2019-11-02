@@ -40,6 +40,7 @@ class ProductionConfig(BaseConfig):
     GROUP_NAME = os.getenv('GROUP_NAME')
     GROUP_SHORT_NAME = os.getenv('GROUP_SHORT_NAME')
     GROUP_URL = os.getenv('GROUP_URL')
+    GROUP_EMAIL = os.getenv('GROUP_EMAIL')
     HOME_HTML = os.getenv('HOME_HTML')
     FEED_URL = os.getenv('FEED_URL')
     FEEDS = json.loads(os.getenv('FEEDS'))

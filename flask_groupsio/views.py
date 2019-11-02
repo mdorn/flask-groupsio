@@ -53,9 +53,7 @@ def messages():
     data = item.all()
     return render_template(
         'messages.html',
-        items=data,
-        group_name=app.config['GROUP_NAME'],
-        group_url=app.config['GROUP_URL']
+        items=data
     )
 
 
