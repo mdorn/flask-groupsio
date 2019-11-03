@@ -13,6 +13,9 @@ class BaseConfig(object):
     GROUP_NAME = ''
     GROUP_SHORT_NAME = ''
     GROUP_URL = 'https://group.groups.io/g/subgroup'
+    GROUP_EMAIL = ''
+    GROUP_EMAIL_SUBSCRIBE = ''
+    SHARED_ACCOUNT=''
 
     HOME_HTML = '''
     <h1>Your Org</h1>
@@ -41,6 +44,8 @@ class ProductionConfig(BaseConfig):
     GROUP_SHORT_NAME = os.getenv('GROUP_SHORT_NAME')
     GROUP_URL = os.getenv('GROUP_URL')
     GROUP_EMAIL = os.getenv('GROUP_EMAIL')
+    GROUP_EMAIL_SUBSCRIBE = os.getenv('GROUP_EMAIL_SUBSCRIBE')
     HOME_HTML = os.getenv('HOME_HTML')
     FEED_URL = os.getenv('FEED_URL')
     FEEDS = json.loads(os.getenv('FEEDS'))
+    SHARED_ACCOUNT=os.getenv('SHARED_ACCOUNT')

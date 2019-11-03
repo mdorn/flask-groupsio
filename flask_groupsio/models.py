@@ -25,7 +25,16 @@ class Message(Model):
 
 
 class File(Model):
-    API_URL = 'https://groups.io/api/v1/getfiledirectory?group_id={}'.format(app.config['GROUP_ID'])
+    API_URL = 'https://groups.io/api/v1/getfiledirectory?group_id={}&limit=100'.format(app.config['GROUP_ID'])
+
+    def all_in_folder(self, path):
+        api_url = 'https://groups.io/api/v1/getfiledirectory?group_id={}&path={}&limit=100'.format(app.config['GROUP_ID'], path)
+        resp = groupsio_api_query(api_url)
+        if resp['data'] is not None:
+            return resp['data']
+        else:
+            return []
+
 
 
 class Event(Model):

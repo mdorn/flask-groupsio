@@ -56,11 +56,14 @@ def messages():
         items=data
     )
 
-
-@app.route('/files', methods=('GET',))
-def files():
+@app.route('/files', methods=('GET',), defaults={'path': None})
+@app.route('/files/<path>', methods=('GET',))
+def files(path):
     item = File()
-    data = item.all()
+    if path:
+        data = item.all_in_folder(path)
+    else:
+        data = item.all()
     return render_template('files.html', items=data)
 
 

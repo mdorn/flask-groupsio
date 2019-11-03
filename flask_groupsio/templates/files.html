@@ -25,12 +25,21 @@
   </thead>
   <tbody>
 {% for i in items %}
+{% if i.media_type == 'folder' %}
     <tr>
-      <td>{{ i.name }}</td>
+      <td><i class="fa fa-folder"></i>&nbsp;{{ i.name }}</td>
+      <td>{{ i.created|parse_date }}</td>
+      <td>{{ i.desc }}</td>
+      <td><a href="/files/{{ i.name }}" class="btn btn-primary">Open</a></td>
+    </tr>
+{% else %}
+    <tr>
+      <td><i class="fa fa-file"></i>&nbsp;{{ i.name }}</td>
       <td>{{ i.created|parse_date }}</td>
       <td>{{ i.desc }}</td>
       <td><a href="{{ i.download_url }}" class="btn btn-primary">Download</a></td>
     </tr>
+{% endif %}
 {% endfor %}
   </tbody>
 </table>
