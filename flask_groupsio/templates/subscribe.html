@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Join</h1>
+
+<div class="alert alert-primary" role="alert">
+
+<ol>
+<li>When you click the button below you will be asked to provide an email address to join the group.</li>
+<li>You will receive an email asking you to confirm your request either replying to the email or clicking the "Confirm account" link. <strong>Click on the "Confirm account" link.</strong></li>
+<li>Set a password. This password will be used for both the {{ config.GROUP_SHORT_NAME }} website and Groups.io.</li>
+<li>You may ignore any recommended "next steps" on the close the Groups.io tab. <strong>Your account will need to be approved by an administrator before you can post messages to the list and use the site.</strong>  Once you're approved you can both login to this website and post/receive messages on the list at <strong><code>{{ config.GROUP_EMAIL }}</code></strong></li>
+</ol>
+</div>
+
+<a href="{{ config.GROUP_URL }}/join" target="_NEW"><button class="btn btn-primary" type="submit">Subscribe</button></a>
+
+{% endblock %}
