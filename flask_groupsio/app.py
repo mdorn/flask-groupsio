@@ -26,14 +26,18 @@ app.secret_key = app.config['SECRET_KEY']
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
 def server_error(e):
-    # note that we set the 404 status explicitly
     return render_template('500.html'), 500
+
+
+@app.errorhandler(401)
+def unauthorized(e):
+    return render_template('401.html'), 401
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -43,3 +47,4 @@ def index():
 
 app.register_error_handler(404, page_not_found)
 app.register_error_handler(500, server_error)
+app.register_error_handler(401, unauthorized)

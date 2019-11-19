@@ -7,6 +7,8 @@ import pytz
 from dateutil.parser import parse
 
 from flask import render_template, request, make_response, url_for, redirect, flash, session
+from werkzeug.exceptions import Unauthorized
+
 
 from .app import app
 from . import filters
@@ -140,7 +142,13 @@ def feeds():
 
 @app.route('/directory', methods=('GET',))
 def directory():
-    # TODO: ensure this view can't be seen by the shared account
+    if session.get('username', None) == app.config['SHARED_ACCOUNT']:
+        raise Unauthorized()
+    if not session['full_name']:
+        flash(
+            'You have not yet set your display name. Please click on your email address in the upper right.',
+            'warning'
+        )
     item = Member()
     data = item.all()
     return render_template('directory.html', items=data)
