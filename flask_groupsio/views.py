@@ -10,7 +10,7 @@ from flask import render_template, request, make_response, url_for, redirect, fl
 
 from .app import app
 from . import filters
-from .forms import LoginForm
+from .forms import LoginForm, ProfileForm
 from .models import Message, File, Event, Member
 
 
@@ -32,11 +32,47 @@ def login_form():
                 for key in cookies.keys():
                     resp.set_cookie(key, cookies[key])
                 session['username'] = req.json()['user']['email']
+                session['full_name'] = req.json()['user']['full_name']
+                session['csrf'] = req.json()['user']['csrf_token']
                 flash('Welcome {}!'.format(req.json()['user']['email']))
+                if not session['full_name']:
+                    flash(
+                        'You have not yet set your display name. Please click on your email address in the upper right.',
+                        'warning'
+                    )
                 return resp
         else:
             flash('Invalid form data.')
     resp = render_template('login.html', form=form)
+    return resp
+
+
+@app.route('/subscribe', methods=['GET'])
+def subscribe():
+    resp = render_template('subscribe.html')
+    return resp
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    form = ProfileForm(display_name=session.get('full_name', ''))
+    if request.method == 'POST':
+        if form.validate():
+            params = {
+                'full_name': form.display_name.data,
+                'csrf': session['csrf'],
+            }
+            req = requests.post('https://groups.io/api/v1/updateprofile', data=params, cookies=request.cookies)
+            if req.status_code != 200:
+                flash('Update failed.')
+            else:
+                resp = redirect(url_for('profile'))
+                session['full_name'] = form.display_name.data
+                flash('Profile updated!')
+                return resp
+        else:
+            flash('Invalid form data.')
+    resp = render_template('profile.html', form=form)
     return resp
 
 
@@ -49,6 +85,7 @@ def logout():
 
 @app.route('/messages', methods=('GET',))
 def messages():
+    # import pdb;pdb.set_trace()
     item = Message()
     data = item.all()
     return render_template(
@@ -103,6 +140,7 @@ def feeds():
 
 @app.route('/directory', methods=('GET',))
 def directory():
+    # TODO: ensure this view can't be seen by the shared account
     item = Member()
     data = item.all()
     return render_template('directory.html', items=data)

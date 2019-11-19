@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, flash
 
 from flask_talisman import Talisman
 from flask_wtf import FlaskForm
@@ -24,6 +24,22 @@ from flask_groupsio import views
 app.secret_key = app.config['SECRET_KEY']
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def server_error(e):
+    # note that we set the 404 status explicitly
+    return render_template('500.html'), 500
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html', html=app.config['HOME_HTML'])
+
+
+app.register_error_handler(404, page_not_found)
+app.register_error_handler(500, server_error)

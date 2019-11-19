@@ -46,9 +46,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/feeds">Feeds</a>
           </li>
+          {% if session.username != config.SHARED_ACCOUNT %}
           <li class="nav-item">
             <a class="nav-link" href="/directory">Directory</a>
           </li>
+          {% endif %}
           {% else %}
           <li class="nav-item">
             <a class="nav-link" href="/login">Log In</a>
@@ -72,7 +74,7 @@
           {% if session.username %}
           <ul style="float:right" class="navbar-nav mr-auto" >
               <li class="nav-item" style="color:#fff">
-                <a class="nav-link" href="#">{{ session.username }}</a>
+                <a class="nav-link" href="/profile">{{ session.username }}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Log out</a>
@@ -84,9 +86,9 @@
     </nav>
 
     <main role="main" class="container">
-        {% with messages = get_flashed_messages() %}
-            {% for message in messages %}
-<div class="alert alert-primary" role="alert">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+<div class="alert alert-{{ "primary" if category == "message" else category }}" role="alert">
   {{ message }}
 </div>
             {% endfor %}
