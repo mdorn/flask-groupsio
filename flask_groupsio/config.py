@@ -16,6 +16,7 @@ class BaseConfig(object):
     GROUP_EMAIL = ''
     GROUP_EMAIL_SUBSCRIBE = ''
     SHARED_ACCOUNT=''
+    SIGNUP_ID=''
 
     HOME_HTML = '''
     <h1>Your Org</h1>
@@ -48,4 +49,6 @@ class ProductionConfig(BaseConfig):
     HOME_HTML = os.getenv('HOME_HTML')
     FEED_URL = os.getenv('FEED_URL')
     FEEDS = json.loads(os.getenv('FEEDS'))
-    SHARED_ACCOUNT=os.getenv('SHARED_ACCOUNT')
+    SHARED_ACCOUNT = os.getenv('SHARED_ACCOUNT')
+    SIGNUP_ID = os.getenv('SIGNUP_ID')
+

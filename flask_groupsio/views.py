@@ -10,7 +10,7 @@ from flask import render_template, request, make_response, url_for, redirect, fl
 
 from .app import app
 from . import filters
-from .forms import LoginForm
+from .forms import LoginForm, SubscribeForm
 from .models import Message, File, Event, Member
 
 
@@ -45,6 +45,17 @@ def logout():
     session.clear()
     resp = redirect(url_for('index'))
     return resp
+
+
+@app.route('/subscribe', methods=['GET', 'POST'])
+def subscribe():
+    form = SubscribeForm()
+    # TODO: process form and repost?
+    if request.method == 'POST':
+        flash('Do it!.')
+    resp = render_template('subscribe.html', form=form)
+    return resp
+
 
 
 @app.route('/messages', methods=('GET',))

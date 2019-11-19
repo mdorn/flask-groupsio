@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Subscribe</h1>
+
+<form action="{{ config.GROUP_URL }}/signup?u={{ config.SIGNUP_ID }}" method="post" id="groupsio-embedded-subscribe-form" name="groupsio-embedded-subscribe-form" target="_blank">
+  <div class="form-group">
+    <label for="email">Email address</label>
+      <input type="email" value="" name="email" class="form-control" id="email" placeholder="Enter your email address" required="">
+
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_{{ config.SIGNUP_ID }}" tabindex="-1" value=""></div>
+    <div id="templatearchives"></div>
+    <br />
+    <input type="submit" value="Subscribe" name="subscribe" id="groupsio-embedded-subscribe" class="btn btn-primary">
+  </div>
+</form>
+
+
+{% endblock %}
