@@ -129,3 +129,4 @@ cookies.curl
 *.DS_Store
 README.local.md
 .env*
+!.env.example
