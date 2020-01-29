@@ -27,11 +27,6 @@ class BaseConfig(object):
     FEEDS = []
 
 
-class DevelopmentConfig(BaseConfig):
-    DEBUG = True
-    TESTING = True
-
-
 class TestingConfig(BaseConfig):
     DEBUG = False
     TESTING = True
@@ -49,3 +44,10 @@ class ProductionConfig(BaseConfig):
     FEED_URL = os.getenv('FEED_URL')
     FEEDS = json.loads(os.getenv('FEEDS'))
     SHARED_ACCOUNT=os.getenv('SHARED_ACCOUNT')
+    EXTERNAL_HTML_HOME=os.getenv('EXTERNAL_HTML_HOME')
+    EXTERNAL_HTML_ELEMS=os.getenv('EXTERNAL_HTML_ELEMS')
+
+
+class DevelopmentConfig(ProductionConfig):
+    DEBUG = True
+    TESTING = True

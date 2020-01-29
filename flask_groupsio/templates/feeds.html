@@ -20,7 +20,7 @@
 
 </div>
 
-<div class="row">
+<div class="row" id="feed-items">
 
 {# FIXME: needs some refactoring/rethinking #}
 {% for i in items %}
@@ -39,7 +39,7 @@
         {% endif %}
         {% endfor %}
         <div class="col-sm-6" style="margin-bottom:15px">
-        <p>{{ i.content.0.value }}</p>
+        <p class="feed-item-content">{{ i.content.0.value|safe }}</p>
         </div>
         </div>
         {% else %}

@@ -39,12 +39,6 @@ def unauthorized(e):
     return render_template('401.html'), 401
 
 
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    return render_template('index.html', html=app.config['HOME_HTML'])
-
-
 app.register_error_handler(404, page_not_found)
 app.register_error_handler(500, server_error)
 app.register_error_handler(401, unauthorized)

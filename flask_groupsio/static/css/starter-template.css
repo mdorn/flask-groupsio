@@ -9,3 +9,5 @@ body {
   padding: 3rem 1.5rem;
   text-align: center;
 }
+
+p.feed-item-content img {max-width:100%;height:auto}

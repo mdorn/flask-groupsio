@@ -1,12 +1,10 @@
-import json
-
 import feedparser
 import requests
 import pytz
 
 from dateutil.parser import parse
 
-from flask import render_template, request, make_response, url_for, redirect, flash, session
+from flask import render_template, request, url_for, redirect, flash, session
 from werkzeug.exceptions import Unauthorized
 
 
@@ -14,6 +12,27 @@ from .app import app
 from . import filters
 from .forms import LoginForm, ProfileForm
 from .models import Message, File, Event, Member
+from .util import get_external_html
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    external_html = ''
+    external_link = app.config.get('EXTERNAL_HTML_HOME', None)
+    if external_link:
+        try:
+            external_html = get_external_html(
+                external_link,
+                app.config.get('EXTERNAL_HTML_ELEMS').split(',')
+            )
+        except:
+            # TODO: log a warning
+            pass
+    return render_template(
+        'index.html',
+        html=app.config['HOME_HTML'],
+        external_html=external_html
+    )
 
 
 @app.route('/login', methods=['GET', 'POST'])
