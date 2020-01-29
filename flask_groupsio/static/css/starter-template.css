@@ -3,7 +3,7 @@ body {
   /*background-image: url("http://localhost:5000/static/img/bg-masthead.jpg");*/
 }
 .home-body-image {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{BACKGROUND_IMAGE}");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://chicago-monk.s3.amazonaws.com/benedict.jpg");
 }
 .starter-template {
   padding: 3rem 1.5rem;
