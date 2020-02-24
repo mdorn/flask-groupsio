@@ -1,4 +1,5 @@
-import feedparser
+import json
+
 import requests
 import pytz
 
@@ -12,26 +13,17 @@ from .app import app
 from . import filters
 from .forms import LoginForm, ProfileForm
 from .models import Message, File, Event, Member
-from .util import get_external_html
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    external_html = ''
-    external_link = app.config.get('EXTERNAL_HTML_HOME', None)
-    if external_link:
-        try:
-            external_html = get_external_html(
-                external_link,
-                app.config.get('EXTERNAL_HTML_ELEMS').split(',')
-            )
-        except:
-            # TODO: log a warning
-            pass
+    req = requests.get(app.config['HOME_CONTENT_URL'], timeout=2)
+    items = json.loads(req.text)
+    # print(items)
     return render_template(
         'index.html',
         html=app.config['HOME_HTML'],
-        external_html=external_html
+        carousel_items=items
     )
 
 
@@ -147,13 +139,11 @@ def calendar():
 
 @app.route('/feeds', methods=('GET',))
 def feeds():
-    feed = feedparser.parse(app.config['FEED_URL'])
-    entries = feed['items']
-    sorted_entries = sorted(entries, key=lambda entry: entry['published_parsed'])
-    sorted_entries.reverse()
+    req = requests.get(app.config['FEED_URL'], timeout=2)
+    items = json.loads(req.text)
     return render_template(
         'feeds.html',
-        items=sorted_entries[:50],
+        items=items,
         feeds=app.config['FEEDS'],
         feed_url=app.config['FEED_URL']
     )

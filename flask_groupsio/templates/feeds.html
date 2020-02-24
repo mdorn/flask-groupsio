@@ -12,10 +12,10 @@
   <i class="fa fa-{{ i.type }}"></i> {{ i.name }}
 </a>
 {% endfor %}
-<a class="btn btn-warning" href="{{ feed_url }}" target="_NEW">
+<!-- <a class="btn btn-warning" href="{{ feed_url }}" target="_NEW">
   <i class="fa fa-rss-square"></i> RSS
 </a>
-</span>
+ --></span>
 </div>
 
 </div>
@@ -27,25 +27,9 @@
   <div class="col-sm-12" style="margin-bottom:15px">
     <div class="card">
       <div class="card-body">
-        {% if i.link|feed_icon == 'facebook' %}
-        <h5 class="card-title"><i class="fa fa-{{ i.link|feed_icon }} fa-lg"></i> Facebook Post</h5>
-        <p>{{ i.published|parse_date }}</p>
-        <div class="row">
-        {% for image in i.media_content %}
-        {% if image.type == 'image/jpeg' %}
-        <div class="col-sm-6" style="margin-bottom:15px">
-        <img src="{{ image.url }}" class="img-fluid" style="float:right;margin-left:15px" />
-        </div>
-        {% endif %}
-        {% endfor %}
-        <div class="col-sm-6" style="margin-bottom:15px">
-        <p class="feed-item-content">{{ i.content.0.value|safe }}</p>
-        </div>
-        </div>
-        {% else %}
         <h5 class="card-title"><i class="fa fa-{{ i.link|feed_icon }} fa-lg"></i> {{ i.title }}</h5>
         <p>{{ i.published|parse_date }}</p>
-        {% endif %}
+        <p class="feed-item-content">{{ i.content.0.value|safe }}</p>
         <p><a href="{{ i.link }}" class="btn btn-primary">Go to post</a></p>
       </div>
     </div>

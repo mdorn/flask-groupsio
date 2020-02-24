@@ -10,4 +10,4 @@ body {
   text-align: center;
 }
 
-p.feed-item-content img {max-width:100%;height:auto}
+.card-body img {max-width:50%;height:auto;float:right;margin-left:15px}

@@ -131,3 +131,4 @@ README.local.md
 .env*
 !.env.example
 _test.py
+_sandbox/
