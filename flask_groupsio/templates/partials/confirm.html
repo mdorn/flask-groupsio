@@ -1,0 +1,13 @@
+<div class="alert alert-warning" role="alert">
+  <p>Please enter an invite code to continue.</p>
+<form action="/confirm" method="POST" class="form-inline">
+  <div class="form-group">
+    {{ form.invite_code(class_="form-control", id="invite_code", placeholder="Enter invite code" ) }}
+    &nbsp;
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+  </div>
+  {{ form.csrf_token }}
+
+</form>
+</div>

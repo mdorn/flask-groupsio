@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, session, flash
+from flask import Flask, render_template
 
 from flask_talisman import Talisman
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, PasswordField
-from wtforms.validators import DataRequired, Length
-
 
 app = Flask(__name__)
 

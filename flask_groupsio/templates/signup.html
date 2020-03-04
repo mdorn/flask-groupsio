@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Sign Up</h1>
+<div class="alert alert-primary" role="alert">
+Already have a <a href="https://groups.io/" target="_NEW">Groups.io</a> account? Click <a href="/login">here</a> to log in. Otherwise fill in the form below to sign up.
+</div>
+<form action="" method="POST">
+  <div class="form-group">
+    <label for="email">Email address</label>
+    {{ form.email(class_="form-control", id="email", placeholder="Enter email") }}
+    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <small id="emailHelp" class="form-text text-muted">Passwords must be at least 6 characters long.</small>
+    {{ form.password(class_="form-control", id="password", placeholder="Password", type="password") }}
+  </div>
+  <div class="form-group">
+    <label for="password">Confirm Password</label>
+    {{ form.confirm_password(class_="form-control", id="confirm_password", placeholder="Confirm Password", type="password") }}
+  </div>
+  {{ form.csrf_token }}
+  <small id="emailHelp" class="form-text text-muted">Note: Submitting this form will create an account on Groups.io, the platform on which this website is built. Click <a href="https://groups.io/static/tos" target="_NEW">here</a> to view the Groups.io terms and conditions.</small><br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
