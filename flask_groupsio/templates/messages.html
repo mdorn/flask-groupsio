@@ -20,7 +20,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ i.subject }}</h5>
         <p>{{ i.created|parse_date }} - {{ i.name }}</p>
-        <p class="card-text">{{ i.summary|parse_markdown|safe }}</p>
+        <p class="card-text">{{ i.body|safe }}</p>
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
     </div>

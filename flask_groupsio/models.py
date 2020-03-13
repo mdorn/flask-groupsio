@@ -21,7 +21,7 @@ class Model(object):
 
 
 class Message(Model):
-    API_URL = 'https://groups.io/api/v1/gettopics?group_id={}'.format(app.config['GROUP_ID'])
+    API_URL = 'https://groups.io/api/v1/getmessages?group_id={}&limit=100&sort_field=created&sort_dir=desc'.format(app.config['GROUP_ID'])
 
 
 class File(Model):
