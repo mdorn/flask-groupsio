@@ -36,6 +36,12 @@ class File(Model):
             return []
 
 
+    def get_url(self, path):
+        api_url = 'https://groups.io/api/v1/getfile?group_id={}&path={}'.format(app.config['GROUP_ID'], path)
+        resp = groupsio_api_query(api_url)
+        url = resp['download_url']
+        return url
+
 
 class Event(Model):
 

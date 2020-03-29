@@ -186,6 +186,15 @@ def files(path):
     return render_template('files.html', items=data)
 
 
+@app.route('/get-file', methods=('GET',))
+@authorize
+def get_file():
+    path = request.args.get('path')
+    file = File()
+    result = file.get_url(path)
+    return redirect(result)
+
+
 @app.route('/calendar', methods=('GET',))
 @authorize
 def calendar():
