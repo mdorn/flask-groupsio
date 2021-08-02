@@ -27,7 +27,7 @@
 {% for i in items %}
 {% if i.media_type == 'folder' %}
     <tr>
-      <td><i class="fa fa-folder"></i>&nbsp;<a href="/files/{{ i.name }}" style="font-weight:bold;color:#ddd;">{{ i.name }}</a></td>
+      <td><i class="fa fa-folder"></i>&nbsp;<a href="/files/{{ i|folder_path }}" style="font-weight:bold;color:#ddd;">{{ i.name }}</a></td>
       <td>{{ i.created|parse_date }}</td>
       <td>{{ i.desc }}</td>
       <td><a href="/files/{{ i.name }}" class="btn btn-primary">Open</a></td>

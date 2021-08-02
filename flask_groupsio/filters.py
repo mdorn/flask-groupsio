@@ -27,6 +27,16 @@ def feed_icon(link):
     return val
 
 
+@app.template_filter('folder_path')
+def folder_path(obj):
+    if obj['path']:
+        val = '{}/{}'.format(obj['path'], obj['name'])
+    else:
+        val = obj['name']
+    return val
+
+
 app.jinja_env.filters['parse_date'] = parse_date
 app.jinja_env.filters['parse_markdown'] = parse_markdown
 app.jinja_env.filters['feed_icon'] = feed_icon
+app.jinja_env.filters['folder_path'] = folder_path

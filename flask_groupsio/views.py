@@ -175,13 +175,14 @@ def messages():
     )
 
 @app.route('/files', methods=('GET',), defaults={'path': None})
-@app.route('/files/<path>', methods=('GET',))
+@app.route('/files/<path:path>', methods=('GET',))
 @authorize
 def files(path):
     item = File()
     if path:
         data = item.all_in_folder(path)
     else:
+        # root level file listing
         data = item.all()
     return render_template('files.html', items=data)
 
