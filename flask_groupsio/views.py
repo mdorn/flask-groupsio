@@ -202,18 +202,20 @@ def calendar():
     item = Event()
     events = item.all()
     for_cal = []
-    central = pytz.timezone('US/Central')
+    central = pytz.timezone('US/Central')  # TODO: make param
     for e in events:
         start = parse(e['start_time'])
         end = parse(e['end_time'])
-        start_final = start.astimezone(central).isoformat()
-        end_final = end.astimezone(central).isoformat()
-        for_cal.append({
+        obj = {
             'title': e['name'],
             'description': e['description'],
-            'start': start_final,
-            'end': end_final,
-        })
+            'backgroundColor': e['color_hex'],
+            'start': start.astimezone(central).isoformat(),
+            'end': end.astimezone(central).isoformat(),
+        }
+        if e['all_day']:
+            obj['allDay'] = True
+        for_cal.append(obj)
     return render_template('calendar.html', items=for_cal)
 
 
